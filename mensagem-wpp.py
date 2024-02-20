@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 
 # Inicialize o navegador
-driver = webdriver.Chrome()  # ou o navegador de sua escolha
+driver = webdriver.Chrome()
 
 # Abra o WhatsApp Web
 driver.get('https://web.whatsapp.com/')
@@ -12,7 +12,7 @@ input("Faça o login no WhatsApp Web e pressione Enter depois de escanear o cód
 
 # Defina os contatos, mensagens e dias de envio
 contacts_messages_and_days = {
-    "Gabriela Martinez": {"message": "Eaeee Gabi!! Só passando aqui pra lembrar que o vencimento da mensalidade da Academia de Muay Thai tá chegando! 😊 Não esquece de dar aquela renovada no pagamento antes do dia 07 pra continuar firme e forte nos treinos! \n Qualquer dúvida ou se precisar de uma força, tamo junto! É só chamar! \n Valeu e até breve nos tatames!", "send_day": 05},
+    "Gabriela Martinez": {"message": "Eaeee Gabi!! Só passando aqui pra lembrar que o vencimento da mensalidade da Academia de Muay Thai tá chegando! 😊 Não esquece de dar aquela renovada no pagamento antes do dia 07 pra continuar firme e forte nos treinos! \n Qualquer dúvida ou se precisar de uma força, tamo junto! É só chamar! \n Valeu e até breve nos tatames!", "send_day": 5},
     "Luiz Henrique": {"message": "Eaeee Luiz!! Só passando aqui pra lembrar que o vencimento da mensalidade da Academia de Muay Thai tá chegando! 😊 Não esquece de dar aquela renovada no pagamento antes do dia 07 pra continuar firme e forte nos treinos! \n Qualquer dúvida ou se precisar de uma força, tamo junto! É só chamar! \n Valeu e até breve nos tatames!", "send_day": 15},
     "Vinícius Cezar": {"message": "Eaeee Vinícius!! Só passando aqui pra lembrar que o vencimento da mensalidade da Academia de Muay Thai tá chegando! 😊 Não esquece de dar aquela renovada no pagamento antes do dia 07 pra continuar firme e forte nos treinos! \n Qualquer dúvida ou se precisar de uma força, tamo junto! É só chamar! \n Valeu e até breve nos tatames!", "send_day": 15}
 }
@@ -34,7 +34,8 @@ def send_message(contact_name, message):
         message_box.send_keys(message)
         message_box.send_keys(Keys.ENTER)
         
-        print(f"Mensagem enviada para {contact_name}: {message}")
+        # Enviar mensagem de confirmação
+        send_confirmation(confirmation_number, f"Confirmação: Mensagem enviada para {contact_name}")
     except Exception as e:
         print(f"Erro ao enviar mensagem para {contact_name}: {str(e)}")
 
@@ -56,6 +57,23 @@ while True:
     else:
         # Aguarda um minuto antes de verificar novamente
         time.sleep(60)
+        
+# Função para enviar mensagem de confirmação para o contato "RODRIGO VEIGA"
+def send_confirmation():
+    try:
+        contact_name = "RODRIGO VEIGA"
+        confirmation_message = "Mensagem enviada com sucesso!"
+        
+        # Enviar a mensagem de confirmação
+        send_message(contact_name, confirmation_message)
+        
+        print(f"Confirmação enviada para {contact_name}")
+    except Exception as e:
+        print(f"Erro ao enviar confirmação para {contact_name}: {str(e)}")
+
+# Chamada da função para enviar a confirmação
+send_confirmation()        
+
 
 # Feche o navegador após a conclusão
 driver.quit()
