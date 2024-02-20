@@ -12,9 +12,9 @@ input("Faça o login no WhatsApp Web e pressione Enter depois de escanear o cód
 
 # Defina os contatos, mensagens e dias de envio
 contacts_messages_and_days = {
-    "Nome do Contato 1": {"message": "Eaeee NOME!! Só passando aqui pra lembrar que o vencimento da mensalidade da Academia de Muay Thai tá chegando! 😊 Não esquece de dar aquela renovada no pagamento antes do dia 07 pra continuar firme e forte nos treinos! \n Qualquer dúvida ou se precisar de uma força, tamo junto! É só chamar! \n Valeu e até breve nos tatames!", "send_day": 05},
-    "Nome do Contato 2": {"message": "Eaeee NOME!! Só passando aqui pra lembrar que o vencimento da mensalidade da Academia de Muay Thai tá chegando! 😊 Não esquece de dar aquela renovada no pagamento antes do dia 07 pra continuar firme e forte nos treinos! \n Qualquer dúvida ou se precisar de uma força, tamo junto! É só chamar! \n Valeu e até breve nos tatames!", "send_day": 15},
-    "Nome do Contato 2": {"message": "Eaeee NOME!! Só passando aqui pra lembrar que o vencimento da mensalidade da Academia de Muay Thai tá chegando! 😊 Não esquece de dar aquela renovada no pagamento antes do dia 07 pra continuar firme e forte nos treinos! \n Qualquer dúvida ou se precisar de uma força, tamo junto! É só chamar! \n Valeu e até breve nos tatames!", "send_day": 15}
+    "Gabriela Martinez": {"message": "Eaeee Gabi!! Só passando aqui pra lembrar que o vencimento da mensalidade da Academia de Muay Thai tá chegando! 😊 Não esquece de dar aquela renovada no pagamento antes do dia 07 pra continuar firme e forte nos treinos! \n Qualquer dúvida ou se precisar de uma força, tamo junto! É só chamar! \n Valeu e até breve nos tatames!", "send_day": 05},
+    "Luiz Henrique": {"message": "Eaeee Luiz!! Só passando aqui pra lembrar que o vencimento da mensalidade da Academia de Muay Thai tá chegando! 😊 Não esquece de dar aquela renovada no pagamento antes do dia 07 pra continuar firme e forte nos treinos! \n Qualquer dúvida ou se precisar de uma força, tamo junto! É só chamar! \n Valeu e até breve nos tatames!", "send_day": 15},
+    "Vinícius Cezar": {"message": "Eaeee Vinícius!! Só passando aqui pra lembrar que o vencimento da mensalidade da Academia de Muay Thai tá chegando! 😊 Não esquece de dar aquela renovada no pagamento antes do dia 07 pra continuar firme e forte nos treinos! \n Qualquer dúvida ou se precisar de uma força, tamo junto! É só chamar! \n Valeu e até breve nos tatames!", "send_day": 15}
 }
 
 # Função para enviar mensagens
