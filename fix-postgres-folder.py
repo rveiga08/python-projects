@@ -21,22 +21,35 @@ def print_diff(dcmp):
     for sub_dcmp in dcmp.subdirs.values():
         print_diff(sub_dcmp)
 
-def move_missing_files(dcmp, folder1, folder2):
+def move_missing_files(dcmp, folder1, folder2, moved_files, error_files):
     """
     Move arquivos e subpastas faltantes da pasta de origem para a pasta de destino.
     """
     for name in dcmp.left_only:
         src_path = os.path.join(dcmp.left, name)
         dst_path = os.path.join(dcmp.right, name)
-        if os.path.isdir(src_path):
-            shutil.move(src_path, dst_path)
-            print(f"Movendo pasta: {src_path} -> {dst_path}")
-        else:
-            shutil.move(src_path, dst_path)
-            print(f"Movendo arquivo: {src_path} -> {dst_path}")
+        try:
+            if os.path.isdir(src_path):
+                shutil.move(src_path, dst_path)
+                print(f"Movendo pasta: {src_path} -> {dst_path}")
+            else:
+                shutil.move(src_path, dst_path)
+                print(f"Movendo arquivo: {src_path} -> {dst_path}")
+            moved_files.append(src_path)
+        except Exception as e:
+            print(f"Erro ao mover {src_path}: {e}")
+            error_files.append(src_path)
 
     for sub_dcmp in dcmp.subdirs.values():
-        move_missing_files(sub_dcmp, folder1, folder2)
+        move_missing_files(sub_dcmp, folder1, folder2, moved_files, error_files)
+
+def save_moved_files(moved_files, output_file):
+    """
+    Salva os caminhos dos arquivos movidos em um arquivo txt.
+    """
+    with open(output_file, 'w') as f:
+        for file in moved_files:
+            f.write(file + '\n')
 
 def main():
     folder1 = input("Digite o caminho da pasta de origem: ")
@@ -57,8 +70,17 @@ def main():
 
     mover = input("Deseja mover os arquivos e subpastas faltantes para a pasta de destino? (s/n): ")
     if mover.lower() == 's':
-        move_missing_files(dcmp, folder1, folder2)
-        print("Arquivos e subpastas faltantes movidos com sucesso.")
+        moved_files = []
+        error_files = []
+        move_missing_files(dcmp, folder1, folder2, moved_files, error_files)
+        print(f"Total de arquivos movidos com sucesso: {len(moved_files)}")
+        print(f"Total de arquivos com erro ao mover: {len(error_files)}")
+
+        # Salva os caminhos dos arquivos movidos em um arquivo txt
+        save_moved_files(moved_files, 'arquivos_movidos.txt')
+        print("Os caminhos dos arquivos movidos foram salvos em 'arquivos_movidos.txt'.")
+
+    input("Pressione Enter para fechar o sistema.")
 
 if __name__ == "__main__":
     main()
