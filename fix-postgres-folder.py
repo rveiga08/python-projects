@@ -8,7 +8,25 @@ def compare_folders(folder1, folder2):
     """
     return dircmp(folder1, folder2)
 
-def print_diff(dcmp):
+def print_diff_origin_to_dest(dcmp):
+    """
+    Exibe as diferenças que estão na origem, mas não no destino.
+    """
+    for name in dcmp.left_only:
+        print(f"Só na pasta de origem: {name}")
+    for sub_dcmp in dcmp.subdirs.values():
+        print_diff_origin_to_dest(sub_dcmp)
+
+def print_diff_dest_to_origin(dcmp):
+    """
+    Exibe as diferenças que estão no destino, mas não na origem.
+    """
+    for name in dcmp.right_only:
+        print(f"Só na pasta de destino: {name}")
+    for sub_dcmp in dcmp.subdirs.values():
+        print_diff_dest_to_origin(sub_dcmp)
+
+def print_diff_both(dcmp):
     """
     Exibe as diferenças entre duas pastas.
     """
@@ -19,7 +37,7 @@ def print_diff(dcmp):
     for name in dcmp.right_only:
         print(f"Só na pasta de destino: {name}")
     for sub_dcmp in dcmp.subdirs.values():
-        print_diff(sub_dcmp)
+        print_diff_both(sub_dcmp)
 
 def move_missing_files(dcmp, folder1, folder2, moved_files, error_files):
     """
@@ -65,8 +83,24 @@ def main():
 
     dcmp = compare_folders(folder1, folder2)
 
-    print("Diferenças entre as pastas:")
-    print_diff(dcmp)
+    print("Escolha uma opção para exibir as diferenças:")
+    print("1. Somente arquivos/pastas que não estão no destino (Origem -> Destino)")
+    print("2. Somente arquivos/pastas que não estão na origem (Destino -> Origem)")
+    print("3. Ambos")
+    escolha = input("Digite o número da opção desejada: ")
+
+    if escolha == '1':
+        print("Diferenças (Origem -> Destino):")
+        print_diff_origin_to_dest(dcmp)
+    elif escolha == '2':
+        print("Diferenças (Destino -> Origem):")
+        print_diff_dest_to_origin(dcmp)
+    elif escolha == '3':
+        print("Diferenças em ambos os sentidos:")
+        print_diff_both(dcmp)
+    else:
+        print("Opção inválida.")
+        return
 
     mover = input("Deseja mover os arquivos e subpastas faltantes para a pasta de destino? (s/n): ")
     if mover.lower() == 's':
